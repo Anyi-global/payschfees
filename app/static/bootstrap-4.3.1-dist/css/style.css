@@ -111,7 +111,7 @@ img{
     font-weight: 700;
 }
 
-input[type="text"] {
+input[type="text"], select {
 	font-size: 15px;
 	color: #333;
     text-align: left;
@@ -120,7 +120,8 @@ input[type="text"] {
 	width:93%;
 	display:inline-block;
     box-sizing: border-box;
-   	border: none;
+	border: 1px solid #ccc;
+    border-radius: 4px;
     outline: none;
     background: transparent;
 	font-family: 'Raleway', sans-serif;

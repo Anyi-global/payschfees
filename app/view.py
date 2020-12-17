@@ -7,6 +7,8 @@ import re, time, datetime, uuid, os
 from flask import request, render_template, flash, redirect, url_for, session,logging 
 from passlib.hash import sha256_crypt
 from functools import wraps
+import requests, json
+
 
 
 app.secret_key = os.urandom(24)
@@ -53,7 +55,30 @@ def index():
         fees_to_pay=request.form.getlist('fees_to_pay')
         print(fees_to_pay)
         
-        flash("Payment details recorded sucessfully.")
+
+
+        #call the api to save the data
+        payload = {
+            'reg_id':reg_id,
+            'frequency':frequency,
+            'fees_to_pay':fees_to_pay
+        }
+        try:
+            res = requests.post('http://127.0.0.1:5000/api/payfees', json=payload)
+            response = res.json()
+        except Exception as e:
+            flash(e)
+            return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+
+        print("status:", response)
+
+        #if the api status is FALSE
+        if not response["status"]:
+            flash(response["message"])
+            return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+        
+        #if the api status is TRUE
+        flash(response["message"])
         return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
 
     #if the method is GET
