@@ -52,36 +52,60 @@ def index():
         print(reg_id)
         frequency=request.form['frequency']
         print(frequency)
-        fees_to_pay=request.form.getlist('fees_to_pay')
+        fees_to_pay=request.form.getlist('fees_to_pay', type=str)
         print(fees_to_pay)
-        
-
-
+     
         #call the api to save the data
         payload = {
-            'reg_id':reg_id,
+            'registration_id':reg_id,
             'frequency':frequency,
             'fees_to_pay':fees_to_pay
         }
-        try:
-            res = requests.post('http://127.0.0.1:5000/api/payfees', json=payload)
-            response = res.json()
-        except Exception as e:
-            flash(e)
-            return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
 
-        print("status:", response)
+        # try:
+        res = requests.post('http://127.0.0.1:5000/api/payfees', json=payload)
+        response = res.json()
+        # except Exception as e:
+        #     flash(e, "danger")
+        #     return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+
+        print(response)
 
         #if the api status is FALSE
         if not response["status"]:
-            flash(response["message"])
+            flash(response["message"], "danger")
             return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
         
         #if the api status is TRUE
-        flash(response["message"])
-        return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+        flash(response["message"], "success")
+        return redirect("/checkout/{}".format(response["data"]))
 
     #if the method is GET
     else:
         return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
 
+
+
+
+@app.route("/checkout/<string:ref>", methods=["GET", "POST"])
+def checkout(ref):
+    if request.method=='POST':
+        flash("Your record is confirmed", "success")
+        return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+        
+    #if the method is GET
+    else:
+        try:
+            res = requests.get('http://127.0.0.1:5000/api/payfees/{}'.format(ref))
+            response = res.json()
+        except Exception as e:
+            flash(e, "danger")
+            return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+        
+        if not response["status"]:
+            flash(response["message"], "danger")
+            return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+        
+        data = response["data"]
+        length = len(response["data"]["fees"])
+        return render_template("checkout.html", title="Checkout | Pay School Fees", data=data, length=length, year=year)

@@ -111,6 +111,19 @@ img{
     font-weight: 700;
 }
 
+/* table styling */
+
+/* .w3_info table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+  }
+
+.w3_info th, td {
+	padding: 5px;
+	text-align: left;    
+} */
+
+
 input[type="text"], select {
 	font-size: 15px;
 	color: #333;

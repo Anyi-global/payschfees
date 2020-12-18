@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="signupform">
+	<div class="container">
+		<!-- main content -->
+		<div class="agile_info">
+			<div class="w3l_form">
+				<div class="left_grid_info">
+					<h1>Pay School Fees</h1>
+					<p>Pay School Fees is an online portal for swift and seemless payment of school fees.</p>
+					<p>Get started by providing your payment details.</p>
+					<img src="/static/bootstrap-4.3.1-dist/images/pay.jpeg" alt="" />
+				</div>
+            </div>
+            
+			<div class="w3_info">
+                {% include 'includes/_message.html' %}
+                <h2>Payment Summary</h2>
+                <p>Below is the detail of the payment to make:</p>
+                
+                <table class="table table-bordered table-hover">
+                    <tr class="warning">
+                    <th>Registration ID:</th>
+                    <td>{{ data.registration_id }}</td>
+                    </tr>
+                    <tr class="warning">
+                        <th>Frequency:</th>
+                        <td>{{ data.frequency }}</td>
+                    </tr>
+                    <tr class="warning">
+                    <th rowspan="{{ length }}">Fees To Pay:</th>
+                    <td>{{ data.fees[0] }}</td>
+                    </tr>
+                    {% for item in range(1,length) %}
+                        <tr class="warning">
+                            <td>{{ data.fees[item] }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Reference Number:</th>
+                        <td>{{ data.ref }}</td>
+                    </tr>
+                </table><br><br>
+                <form action="/checkout/{{ data.ref }}" method="POST">
+                    <button class="btn btn-danger btn-block" type="submit">Confirmed</button >                
+                </form>
+		    </div>
+		</div>
+		<!-- //main content -->
+	</div>
+	<!-- footer -->
+
+        
+{% endblock %}
