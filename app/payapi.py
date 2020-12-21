@@ -44,7 +44,7 @@ class PaymentDetails(Resource):
         mongo.db.payfees.insert({"registration_id":_id, "frequency":freq, "fees":fees, "ref":ref, "date":nigerian_time()})
 
         #return sucess status
-        msg = "Registration sucessful. Your reference no is {}".format(ref)
+        msg = "Data recorded. Your reference number is {}".format(ref)
         return {"status":True, "message":msg, "data":ref}, 200
 
     

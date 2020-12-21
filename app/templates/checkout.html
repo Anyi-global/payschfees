@@ -21,24 +21,24 @@
                 <p>Below is the detail of the payment to make:</p>
                 
                 <table class="table table-bordered table-hover">
-                    <tr class="warning">
-                    <th>Registration ID:</th>
-                    <td>{{ data.registration_id }}</td>
+                    <tr class="info">
+                        <th>Registration ID:</th>
+                        <td>{{ data.registration_id }}</td>
                     </tr>
-                    <tr class="warning">
+                    <tr class="info">
                         <th>Frequency:</th>
                         <td>{{ data.frequency }}</td>
                     </tr>
-                    <tr class="warning">
-                    <th rowspan="{{ length }}">Fees To Pay:</th>
-                    <td>{{ data.fees[0] }}</td>
+                    <tr class="info">
+                        <th rowspan="{{ length }}">Fees To Pay:</th>
+                        <td>{{ data.fees[0] }}</td>
                     </tr>
                     {% for item in range(1,length) %}
-                        <tr class="warning">
+                        <tr class="info">
                             <td>{{ data.fees[item] }}</td>
                         </tr>
                     {% endfor %}
-                    <tr>
+                    <tr class="info">
                         <th>Reference Number:</th>
                         <td>{{ data.ref }}</td>
                     </tr>
