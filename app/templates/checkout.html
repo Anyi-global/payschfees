@@ -22,15 +22,15 @@
                 
                 <table class="table table-bordered table-hover">
                     <tr class="info">
-                        <th>Registration ID:</th>
+                        <th><strong>Registration ID:</strong></th>
                         <td>{{ data.registration_id }}</td>
                     </tr>
                     <tr class="info">
-                        <th>Frequency:</th>
+                        <th><strong>Frequency</strong></th>
                         <td>{{ data.frequency }}</td>
                     </tr>
                     <tr class="info">
-                        <th rowspan="{{ length }}">Fees To Pay:</th>
+                        <th rowspan="{{ length }}"><strong>Fees To Pay</strong></th>
                         <td>{{ data.fees[0] }}</td>
                     </tr>
                     {% for item in range(1,length) %}
@@ -39,7 +39,7 @@
                         </tr>
                     {% endfor %}
                     <tr class="info">
-                        <th>Reference Number:</th>
+                        <th><strong>Reference Number</strong></th>
                         <td>{{ data.ref }}</td>
                     </tr>
                 </table><br><br>
