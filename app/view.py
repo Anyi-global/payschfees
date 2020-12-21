@@ -63,7 +63,7 @@ def index():
         }
 
         # try:
-        res = requests.post('http://anyidev.herokuapp.com/api/payfees', json=payload)
+        res = requests.post('anyidev.herokuapp.com/api/payfees', json=payload)
         response = res.json()
         # except Exception as e:
         #     flash(e, "danger")
@@ -96,7 +96,7 @@ def checkout(ref):
     #if the method is GET
     else:
         try:
-            res = requests.get('http://anyidev.herokuapp.com/api/payfees/{}'.format(ref))
+            res = requests.get('anyidev.herokuapp.com/api/payfees/{}'.format(ref))
             response = res.json()
         except Exception as e:
             flash(e, "danger")
