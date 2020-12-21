@@ -62,14 +62,14 @@ def index():
             'fees_to_pay':fees_to_pay
         }
 
-        # try:
-        res = requests.post('anyidev.herokuapp.com/api/payfees', json=payload)
-        response = res.json()
-        # except Exception as e:
-        #     flash(e, "danger")
-        #     return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
+        try:
+            res = requests.post('http://anyidev.herokuapp.com/api/payfees', json=payload)
+            response = res.json()
+        except Exception as e:
+            flash(e, "danger")
+            return render_template("index.html", title="Home | Pay School Fees", home="active", year=year)
 
-        print(response)
+        # print(response)
 
         #if the api status is FALSE
         if not response["status"]:
@@ -96,7 +96,7 @@ def checkout(ref):
     #if the method is GET
     else:
         try:
-            res = requests.get('anyidev.herokuapp.com/api/payfees/{}'.format(ref))
+            res = requests.get('http://anyidev.herokuapp.com/api/payfees/{}'.format(ref))
             response = res.json()
         except Exception as e:
             flash(e, "danger")

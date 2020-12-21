@@ -35,7 +35,7 @@ class PaymentDetails(Resource):
         freq= data["frequency"]
         fees= data["fees_to_pay"]
 
-        print(fees)
+        # print(fees)
 
         #generete 10 digit ref no
         ref  = str(uuid.uuid4().int)[:10]
