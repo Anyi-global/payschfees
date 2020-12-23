@@ -71,4 +71,13 @@ class GetOneRecord(Resource):
             
         return {"status":True, "message":'data retrieved', "data":getone}, 200
 
+
+    def put(self, reference):
+        #get all the data in the database
+        getone = mongo.db.payfees.update_one({"ref":reference}, {'$set': {"date":nigerian_time(), "frequency":"fine"}})
+        if not getone:
+            return {"message":'No record found for the user'}, 200
+            
+        return {"status":True, "message":'data updated successfully'}, 200
+
 api.add_resource(GetOneRecord, '/api/payfees/<string:reference>')
